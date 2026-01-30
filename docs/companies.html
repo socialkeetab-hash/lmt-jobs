@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Companies | LMT JOBS</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .companies-hero {
+            padding: 8rem 10% 4rem;
+            text-align: center;
+            background: linear-gradient(to bottom, var(--card-bg), transparent);
+        }
+
+        .companies-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .companies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            padding: 2rem 10% 8rem;
+        }
+
+        .company-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .company-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-color);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(255, 215, 0, 0.1);
+        }
+
+        .company-logo {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            background: white;
+            padding: 10px;
+            border-radius: 1rem;
+        }
+
+        .company-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+
+        .company-desc {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            opacity: 0.8;
+            margin-bottom: 1rem;
+        }
+
+        .action-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .btn-action {
+            padding: 0.8rem;
+            border-radius: 0.8rem;
+            border: 1px solid var(--border-color);
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .btn-action:hover {
+            background: var(--accent-color);
+            color: black;
+            border-color: var(--accent-color);
+        }
+
+        /* Modal Styling for details */
+        .info-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--modal-overlay);
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .info-content {
+            background: var(--card-bg);
+            width: 90%;
+            max-width: 600px;
+            padding: 3rem;
+            border-radius: 2rem;
+            border: 1px solid var(--accent-color);
+            position: relative;
+        }
+
+        .close-info {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--accent-color);
+        }
+
+        .info-title {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-color);
+        }
+
+        .info-body {
+            line-height: 1.8;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .back-nav {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            z-index: 100;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="back-nav" style="display: flex; gap: 1rem;">
+        <a href="index.html" class="btn-outline" style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+            <i class="fas fa-arrow-left"></i> Back to Home
+        </a>
+        <button class="theme-toggle" id="themeToggle">
+            <i class="fas fa-sun"></i>
+        </button>
+    </div>
+
+    <section class="companies-hero">
+        <span>TOP RECRUITERS</span>
+        <h1>Partner <span>Companies</span></h1>
+        <p>Expert guides and preparation material for your dream companies.</p>
+    </section>
+
+    <div class="companies-grid">
+        
+        <div class="company-card">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Tata_Consultancy_Services_Logo.svg/512px-Tata_Consultancy_Services_Logo.svg.png" alt="TCS" class="company-logo">
+            <div class="company-name">TCS</div>
+            <p class="company-desc">Tata Consultancy Services is a global leader in IT services, consulting & business solutions.</p>
+
+            <div class="action-buttons">
+                <button class="btn-action"
+                    onclick="showInfo('TCS', 'Hiring Process', `1. TCS NQT (National Qualifier Test), 2. Technical Interview, 3. HR Interview.`)">
+                    <i class="fas fa-user-tie"></i> Hiring Process
+                </button>
+                <button class="btn-action"
+                    onclick="showInfo('TCS', 'Syllabus', `Numerical Ability, Verbal Ability, Reasoning Ability, Programming Logic, and Hands-on Coding.`)">
+                    <i class="fas fa-book"></i> Syllabus
+                </button>
+                <button class="btn-action"
+                    onclick="showInfo('TCS', 'Exam Pattern', `Cognitive (60 mins), Technical (60 mins). Total duration: 180 mins.`)">
+                    <i class="fas fa-clipboard-list"></i> Exam Pattern
+                </button>
+                <button class="btn-action"
+                    onclick="showInfo('TCS', 'Eligibility Criteria', `60% throughout Tenth, Twelfth, Diploma, Graduation and Post-Graduation.`)">
+                    <i class="fas fa-check-circle"></i> Eligibility
+                </button>
+            </div>
+        </div>
+        
+        <div class="company-card">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a0/Wipro_Primary_Logo_Color_RGB.svg" alt="Wipro" class="company-logo">
+            <div class="company-name">Wipro</div>
+            <p class="company-desc">A leading global information technology, consulting and business process services company.</p>
+
+            <div class="action-buttons">
+                <button class="btn-action"
+                    onclick="showInfo('Wipro', 'Hiring Process', `1. Online Assessment, 2. Technical Interview, 3. HR Interview.`)">
+                    <i class="fas fa-user-tie"></i> Hiring Process
+                </button>
+                <button class="btn-action"
+                    onclick="showInfo('Wipro', 'Syllabus', `Quantitative Aptitude, Logical Reasoning, Verbal Ability, Basic Programming, and Essay Writing.`)">
+                    <i class="fas fa-book"></i> Syllabus
+                </button>
+                <button class="btn-action"
+                    onclick="showInfo('Wipro', 'Exam Pattern', `Aptitude (48 mins), Written Communication (20 mins), Online Programming (60 mins).`)">
+                    <i class="fas fa-clipboard-list"></i> Exam Pattern
+                </button>
+                <button class="btn-action"
+                    onclick="showInfo('Wipro', 'Eligibility Criteria', `60% in 10th and 12th standard. 60% or 6.0 CGPA in Graduation.`)">
+                    <i class="fas fa-check-circle"></i> Eligibility
+                </button>
+            </div>
+        </div>
+        
+        <div class="company-card">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google" class="company-logo">
+            <div class="company-name">Google</div>
+            <p class="company-desc">Google's mission is to organize the world's information and make it universally accessible and useful.</p>
+
+            <div class="action-buttons">
+                <button class="btn-action"
+                    onclick="showInfo('Google', 'Hiring Process', `1. Online Coding Challenge, 2. Technical Phone Screen, 3. Virtual Onsite (4-5 rounds).`)">
+                    <i class="fas fa-user-tie"></i> Hiring Process
+                </button>
+                <button class="btn-action"
+                    onclick="showInfo('Google', 'Syllabus', `Advanced Data Structures, Algorithms, System Design, and Googliness.`)">
+                    <i class="fas fa-book"></i> Syllabus
+                </button>
+                <button class="btn-action"
+                    onclick="showInfo('Google', 'Exam Pattern', `45 minutes per round with one or two complex problems.`)">
+                    <i class="fas fa-clipboard-list"></i> Exam Pattern
+                </button>
+                <button class="btn-action"
+                    onclick="showInfo('Google', 'Eligibility Criteria', `Bachelor's degree in Computer Science or equivalent practical experience.`)">
+                    <i class="fas fa-check-circle"></i> Eligibility
+                </button>
+            </div>
+        </div>
+        
+        <div class="company-card">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_logo_%282012%29.svg" alt="Microsoft" class="company-logo">
+            <div class="company-name">Microsoft</div>
+            <p class="company-desc">Microsoft enables digital transformation for the era of an intelligent cloud and an intelligent edge.</p>
+
+            <div class="action-buttons">
+                <button class="btn-action"
+                    onclick="showInfo('Microsoft', 'Hiring Process', `1. Online Assessment, 2. Technical Interview Rounds, 3. System Design/HM Round.`)">
+                    <i class="fas fa-user-tie"></i> Hiring Process
+                </button>
+                <button class="btn-action"
+                    onclick="showInfo('Microsoft', 'Syllabus', `DSA, Object-Oriented Design, System Design, and Behavioral Questions.`)">
+                    <i class="fas fa-book"></i> Syllabus
+                </button>
+                <button class="btn-action"
+                    onclick="showInfo('Microsoft', 'Exam Pattern', `Multiple technical rounds (45-60 mins each).`)">
+                    <i class="fas fa-clipboard-list"></i> Exam Pattern
+                </button>
+                <button class="btn-action"
+                    onclick="showInfo('Microsoft', 'Eligibility Criteria', `CGPA of 7 or above. No standing backlogs.`)">
+                    <i class="fas fa-check-circle"></i> Eligibility
+                </button>
+            </div>
+        </div>
+        
+        <div class="company-card">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Amazon" class="company-logo">
+            <div class="company-name">Amazon</div>
+            <p class="company-desc">Amazon is guided by four principles: customer obsession and passion for invention.</p>
+
+            <div class="action-buttons">
+                <button class="btn-action"
+                    onclick="showInfo('Amazon', 'Hiring Process', `1. Online Assessment, 2. Technical Phone Screen, 3. Virtual Onsite (The 'Loop').`)">
+                    <i class="fas fa-user-tie"></i> Hiring Process
+                </button>
+                <button class="btn-action"
+                    onclick="showInfo('Amazon', 'Syllabus', `Data Structures, Algorithms, Scalability, and Amazon's Leadership Principles.`)">
+                    <i class="fas fa-book"></i> Syllabus
+                </button>
+                <button class="btn-action"
+                    onclick="showInfo('Amazon', 'Exam Pattern', `Heavy emphasis on Leadership Principles. 4-5 rounds.`)">
+                    <i class="fas fa-clipboard-list"></i> Exam Pattern
+                </button>
+                <button class="btn-action"
+                    onclick="showInfo('Amazon', 'Eligibility Criteria', `Strong academic record. Proficiency in at least one modern programming language.`)">
+                    <i class="fas fa-check-circle"></i> Eligibility
+                </button>
+            </div>
+        </div>
+        
+    </div>
+
+    <div id="infoModal" class="info-modal">
+        <div class="info-content">
+            <span class="close-info" onclick="closeInfo()">&times;</span>
+            <div id="modalCompany"
+                style="font-size: 0.9rem; color: #888; text-transform: uppercase; letter-spacing: 2px;"></div>
+            <div id="modalTitle" class="info-title"></div>
+            <div id="modalBody" class="info-body"></div>
+        </div>
+    </div>
+
+    <script src="/static/js/main.js"></script>
+    <script>
+        function showInfo(company, title, content) {
+            document.getElementById('modalCompany').innerText = company;
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalBody').innerText = content;
+            document.getElementById('infoModal').style.display = 'flex';
+        }
+
+        function closeInfo() {
+            document.getElementById('infoModal').style.display = 'none';
+        }
+
+        window.onclick = function (event) {
+            if (event.target == document.getElementById('infoModal')) {
+                closeInfo();
+            }
+        }
+    </script>
+</body>
+
+</html>

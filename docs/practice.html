@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice Sheet | LMT JOBS</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .practice-hero {
+            padding: 8rem 10% 4rem;
+            text-align: center;
+            background: linear-gradient(to bottom, var(--card-bg), transparent);
+        }
+
+        .practice-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 5% 8rem;
+        }
+
+        .topic-section {
+            margin-bottom: 4rem;
+        }
+
+        .topic-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            color: var(--accent-color);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+            padding-bottom: 1rem;
+        }
+
+        .topic-header h2 {
+            font-size: 1.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .problems-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 0.8rem;
+        }
+
+        .problem-row {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .problem-row:hover {
+            transform: scale(1.01);
+            border-color: var(--accent-color);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.05);
+        }
+
+        .problem-row td {
+            padding: 1.2rem 1.5rem;
+        }
+
+        .problem-row td:first-child {
+            border-radius: 1rem 0 0 1rem;
+            font-weight: 600;
+            color: #888;
+            width: 60px;
+        }
+
+        .problem-row td:last-child {
+            border-radius: 0 1rem 1rem 0;
+            text-align: right;
+        }
+
+        .problem-name {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .problem-name:hover {
+            color: var(--accent-color);
+        }
+
+        .difficulty-badge {
+            padding: 0.4rem 1rem;
+            border-radius: 2rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .difficulty-Easy {
+            background: rgba(0, 255, 127, 0.1);
+            color: #00ff7f;
+        }
+
+        .difficulty-Medium {
+            background: rgba(255, 165, 0, 0.1);
+            color: #ffa500;
+        }
+
+        .difficulty-Hard {
+            background: rgba(255, 69, 0, 0.1);
+            color: #ff4500;
+        }
+
+        .btn-solve {
+            background: var(--accent-glow);
+            color: var(--accent-color);
+            padding: 0.6rem 1.2rem;
+            border-radius: 0.8rem;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-solve:hover {
+            background: var(--accent-color);
+            color: black;
+        }
+
+        .search-bar {
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .search-bar i {
+            position: absolute;
+            left: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #888;
+        }
+
+        .search-bar input {
+            width: 100%;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 1.2rem 1.2rem 1.2rem 3.5rem;
+            border-radius: 1.2rem;
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .search-bar input:focus {
+            border-color: var(--accent-color);
+        }
+
+        .back-nav {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            z-index: 100;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="back-nav" style="display: flex; gap: 1rem;">
+        <a href="index.html" class="btn-outline" style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+            <i class="fas fa-arrow-left"></i> Back to Home
+        </a>
+        <button class="theme-toggle" id="themeToggle">
+            <i class="fas fa-sun"></i>
+        </button>
+    </div>
+
+    <section class="practice-hero">
+        <span>PREMIUM CONTENT</span>
+        <h1>Ultimate <span>Coding</span> Sheet</h1>
+        <p>A hand-picked collection of 450+ high-impact coding problems for top tech companies.</p>
+    </section>
+
+    <div class="practice-container">
+        <div class="search-bar">
+            <i class="fas fa-search"></i>
+            <input type="text" id="problemSearch" placeholder="Search problems, topics, or difficulty..."
+                onkeyup="filterProblems()">
+        </div>
+
+        
+        <div class="topic-section">
+            <div class="topic-header">
+                <i class="fas fa-folder-open"></i>
+                <h2>NUMBERS</h2>
+                <span style="opacity: 0.5; font-size: 0.9rem;">(6 Problems)</span>
+            </div>
+
+            <table class="problems-table">
+                
+                <tr class="problem-row">
+                    <td>#1</td>
+                    <td>
+                        <a href="https://leetcode.com/problems/climbing-stairs" target="_blank" class="problem-name">Climbing Stairs</a>
+                    </td>
+                    <td>
+                        <span class="difficulty-badge difficulty-Easy">Easy</span>
+                    </td>
+                    <td>
+                        <a href="https://leetcode.com/problems/climbing-stairs" target="_blank" class="btn-solve">
+                            Solve <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </td>
+                </tr>
+                
+                <tr class="problem-row">
+                    <td>#2</td>
+                    <td>
+                        <a href="https://www.geeksforgeeks.org/program-check-given-year-leap-year/" target="_blank" class="problem-name">Check if a given year is leap year</a>
+                    </td>
+                    <td>
+                        <span class="difficulty-badge difficulty-Easy">Easy</span>
+                    </td>
+                    <td>
+                        <a href="https://www.geeksforgeeks.org/program-check-given-year-leap-year/" target="_blank" class="btn-solve">
+                            Solve <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </td>
+                </tr>
+                
+                <tr class="problem-row">
+                    <td>#3</td>
+                    <td>
+                        <a href="https://www.geeksforgeeks.org/prime-numbers/" target="_blank" class="problem-name">Prime Numbers</a>
+                    </td>
+                    <td>
+                        <span class="difficulty-badge difficulty-Easy">Easy</span>
+                    </td>
+                    <td>
+                        <a href="https://www.geeksforgeeks.org/prime-numbers/" target="_blank" class="btn-solve">
+                            Solve <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </td>
+                </tr>
+                
+                <tr class="problem-row">
+                    <td>#4</td>
+                    <td>
+                        <a href="https://leetcode.com/problems/valid-perfect-square/" target="_blank" class="problem-name">Valid Perfect Square</a>
+                    </td>
+                    <td>
+                        <span class="difficulty-badge difficulty-Easy">Easy</span>
+                    </td>
+                    <td>
+                        <a href="https://leetcode.com/problems/valid-perfect-square/" target="_blank" class="btn-solve">
+                            Solve <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </td>
+                </tr>
+                
+                <tr class="problem-row">
+                    <td>#5</td>
+                    <td>
+                        <a href="https://leetcode.com/problems/add-digits/" target="_blank" class="problem-name">Add Digits</a>
+                    </td>
+                    <td>
+                        <span class="difficulty-badge difficulty-Easy">Easy</span>
+                    </td>
+                    <td>
+                        <a href="https://leetcode.com/problems/add-digits/" target="_blank" class="btn-solve">
+                            Solve <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </td>
+                </tr>
+                
+                <tr class="problem-row">
+                    <td>#6</td>
+                    <td>
+                        <a href="https://leetcode.com/problems/power-of-two/" target="_blank" class="problem-name">Power of Two</a>
+                    </td>
+                    <td>
+                        <span class="difficulty-badge difficulty-Easy">Easy</span>
+                    </td>
+                    <td>
+                        <a href="https://leetcode.com/problems/power-of-two/" target="_blank" class="btn-solve">
+                            Solve <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </td>
+                </tr>
+                
+            </table>
+        </div>
+        
+        <div class="topic-section">
+            <div class="topic-header">
+                <i class="fas fa-folder-open"></i>
+                <h2>ARRAYS</h2>
+                <span style="opacity: 0.5; font-size: 0.9rem;">(8 Problems)</span>
+            </div>
+
+            <table class="problems-table">
+                
+                <tr class="problem-row">
+                    <td>#1</td>
+                    <td>
+                        <a href="https://leetcode.com/problems/two-sum" target="_blank" class="problem-name">Two Sum</a>
+                    </td>
+                    <td>
+                        <span class="difficulty-badge difficulty-Easy">Easy</span>
+                    </td>
+                    <td>
+                        <a href="https://leetcode.com/problems/two-sum" target="_blank" class="btn-solve">
+                            Solve <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </td>
+                </tr>
+                
+                <tr class="problem-row">
+                    <td>#2</td>
+                    <td>
+                        <a href="https://leetcode.com/problems/move-zeroes" target="_blank" class="problem-name">Move Zeroes</a>
+                    </td>
+                    <td>
+                        <span class="difficulty-badge difficulty-Easy">Easy</span>
+                    </td>
+                    <td>
+                        <a href="https://leetcode.com/problems/move-zeroes" target="_blank" class="btn-solve">
+                            Solve <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </td>
+                </tr>
+                
+                <tr class="problem-row">
+                    <td>#3</td>
+                    <td>
+                        <a href="https://leetcode.com/problems/contains-duplicate" target="_blank" class="problem-name">Contains Duplicate</a>
+                    </td>
+                    <td>
+                        <span class="difficulty-badge difficulty-Easy">Easy</span>
+                    </td>
+                    <td>
+                        <a href="https://leetcode.com/problems/contains-duplicate" target="_blank" class="btn-solve">
+                            Solve <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </td>
+                </tr>
+                
+                <tr class="problem-row">
+                    <td>#4</td>
+                    <td>
+                        <a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock/" target="_blank" class="problem-name">Best Time to Buy and Sell Stock</a>
+                    </td>
+                    <td>
+                        <span class="difficulty-badge difficulty-Easy">Easy</span>
+                    </td>
+                    <td>
+                        <a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock/" target="_blank" class="btn-solve">
+                            Solve <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </td>
+                </tr>
+                
+                <tr class="problem-row">
+                    <td>#5</td>
+                    <td>
+                        <a href="https://leetcode.com/problems/maximum-subarray/" target="_blank" class="problem-name">Maximum Subarray (Kadane's)</a>
+                    </td>
+                    <td>
+                        <span class="difficulty-badge difficulty-Medium">Medium</span>
+                    </td>
+                    <td>
+                        <a href="https://leetcode.com/problems/maximum-subarray/" target="_blank" class="btn-solve">
+                            Solve <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </td>
+                </tr>
+                
+                <tr class="problem-row">
+                    <td>#6</td>
+                    <td>
+                        <a href="https://leetcode.com/problems/rotate-array/" target="_blank" class="problem-name">Rotate Array</a>
+                    </td>
+                    <td>
+                        <span class="difficulty-badge difficulty-Medium">Medium</span>
+                    </td>
+                    <td>
+                        <a href="https://leetcode.com/problems/rotate-array/" target="_blank" class="btn-solve">
+                            Solve <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </td>
+                </tr>
+                
+                <tr class="problem-row">
+                    <td>#7</td>
+                    <td>
+                        <a href="https://leetcode.com/problems/3sum/" target="_blank" class="problem-name">3Sum</a>
+                    </td>
+                    <td>
+                        <span class="difficulty-badge difficulty-Medium">Medium</span>
+                    </td>
+                    <td>
+                        <a href="https://leetcode.com/problems/3sum/" target="_blank" class="btn-solve">
+                            Solve <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </td>
+                </tr>
+                
+                <tr class="problem-row">
+                    <td>#8</td>
+                    <td>
+                        <a href="https://leetcode.com/problems/product-of-array-except-self/" target="_blank" class="problem-name">Product of Array Except Self</a>
+                    </td>
+                    <td>
+                        <span class="difficulty-badge difficulty-Medium">Medium</span>
+                    </td>
+                    <td>
+                        <a href="https://leetcode.com/problems/product-of-array-except-self/" target="_blank" class="btn-solve">
+                            Solve <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </td>
+                </tr>
+                
+            </table>
+        </div>
+        
+        <div class="topic-section">
+            <div class="topic-header">
+                <i class="fas fa-folder-open"></i>
+                <h2>STRINGS</h2>
+                <span style="opacity: 0.5; font-size: 0.9rem;">(6 Problems)</span>
+            </div>
+
+            <table class="problems-table">
+                
+                <tr class="problem-row">
+                    <td>#1</td>
+                    <td>
+                        <a href="https://leetcode.com/problems/reverse-string/" target="_blank" class="problem-name">Reverse String</a>
+                    </td>
+                    <td>
+                        <span class="difficulty-badge difficulty-Easy">Easy</span>
+                    </td>
+                    <td>
+                        <a href="https://leetcode.com/problems/reverse-string/" target="_blank" class="btn-solve">
+                            Solve <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </td>
+                </tr>
+                
+                <tr class="problem-row">
+                    <td>#2</td>
+                    <td>
+                        <a href="https://leetcode.com/problems/valid-anagram/" target="_blank" class="problem-name">Valid Anagram</a>
+                    </td>
+                    <td>
+                        <span class="difficulty-badge difficulty-Easy">Easy</span>
+                    </td>
+                    <td>
+                        <a href="https://leetcode.com/problems/valid-anagram/" target="_blank" class="btn-solve">
+                            Solve <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </td>
+                </tr>
+                
+                <tr class="problem-row">
+                    <td>#3</td>
+                    <td>
+                        <a href="https://leetcode.com/problems/valid-palindrome/" target="_blank" class="problem-name">Valid Palindrome</a>
+                    </td>
+                    <td>
+                        <span class="difficulty-badge difficulty-Easy">Easy</span>
+                    </td>
+                    <td>
+                        <a href="https://leetcode.com/problems/valid-palindrome/" target="_blank" class="btn-solve">
+                            Solve <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </td>
+                </tr>
+                
+                <tr class="problem-row">
+                    <td>#4</td>
+                    <td>
+                        <a href="https://leetcode.com/problems/longest-common-prefix/" target="_blank" class="problem-name">Longest Common Prefix</a>
+                    </td>
+                    <td>
+                        <span class="difficulty-badge difficulty-Easy">Easy</span>
+                    </td>
+                    <td>
+                        <a href="https://leetcode.com/problems/longest-common-prefix/" target="_blank" class="btn-solve">
+                            Solve <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </td>
+                </tr>
+                
+                <tr class="problem-row">
+                    <td>#5</td>
+                    <td>
+                        <a href="https://leetcode.com/problems/longest-substring-without-repeating-characters/" target="_blank" class="problem-name">Longest Substring Without Repeating Characters</a>
+                    </td>
+                    <td>
+                        <span class="difficulty-badge difficulty-Medium">Medium</span>
+                    </td>
+                    <td>
+                        <a href="https://leetcode.com/problems/longest-substring-without-repeating-characters/" target="_blank" class="btn-solve">
+                            Solve <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </td>
+                </tr>
+                
+                <tr class="problem-row">
+                    <td>#6</td>
+                    <td>
+                        <a href="https://leetcode.com/problems/group-anagrams/" target="_blank" class="problem-name">Group Anagrams</a>
+                    </td>
+                    <td>
+                        <span class="difficulty-badge difficulty-Medium">Medium</span>
+                    </td>
+                    <td>
+                        <a href="https://leetcode.com/problems/group-anagrams/" target="_blank" class="btn-solve">
+                            Solve <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </td>
+                </tr>
+                
+            </table>
+        </div>
+        
+        <div class="topic-section">
+            <div class="topic-header">
+                <i class="fas fa-folder-open"></i>
+                <h2>RECURSION</h2>
+                <span style="opacity: 0.5; font-size: 0.9rem;">(3 Problems)</span>
+            </div>
+
+            <table class="problems-table">
+                
+                <tr class="problem-row">
+                    <td>#1</td>
+                    <td>
+                        <a href="https://leetcode.com/problems/fibonacci-number/" target="_blank" class="problem-name">Fibonacci Number</a>
+                    </td>
+                    <td>
+                        <span class="difficulty-badge difficulty-Easy">Easy</span>
+                    </td>
+                    <td>
+                        <a href="https://leetcode.com/problems/fibonacci-number/" target="_blank" class="btn-solve">
+                            Solve <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </td>
+                </tr>
+                
+                <tr class="problem-row">
+                    <td>#2</td>
+                    <td>
+                        <a href="https://leetcode.com/problems/permutations/" target="_blank" class="problem-name">Permutations</a>
+                    </td>
+                    <td>
+                        <span class="difficulty-badge difficulty-Medium">Medium</span>
+                    </td>
+                    <td>
+                        <a href="https://leetcode.com/problems/permutations/" target="_blank" class="btn-solve">
+                            Solve <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </td>
+                </tr>
+                
+                <tr class="problem-row">
+                    <td>#3</td>
+                    <td>
+                        <a href="https://leetcode.com/problems/subsets/" target="_blank" class="problem-name">Subsets</a>
+                    </td>
+                    <td>
+                        <span class="difficulty-badge difficulty-Medium">Medium</span>
+                    </td>
+                    <td>
+                        <a href="https://leetcode.com/problems/subsets/" target="_blank" class="btn-solve">
+                            Solve <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </td>
+                </tr>
+                
+            </table>
+        </div>
+        
+        <div class="topic-section">
+            <div class="topic-header">
+                <i class="fas fa-folder-open"></i>
+                <h2>SORTING</h2>
+                <span style="opacity: 0.5; font-size: 0.9rem;">(3 Problems)</span>
+            </div>
+
+            <table class="problems-table">
+                
+                <tr class="problem-row">
+                    <td>#1</td>
+                    <td>
+                        <a href="https://leetcode.com/problems/merge-sorted-array/" target="_blank" class="problem-name">Merge Sorted Array</a>
+                    </td>
+                    <td>
+                        <span class="difficulty-badge difficulty-Easy">Easy</span>
+                    </td>
+                    <td>
+                        <a href="https://leetcode.com/problems/merge-sorted-array/" target="_blank" class="btn-solve">
+                            Solve <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </td>
+                </tr>
+                
+                <tr class="problem-row">
+                    <td>#2</td>
+                    <td>
+                        <a href="https://leetcode.com/problems/sort-colors/" target="_blank" class="problem-name">Sort Colors</a>
+                    </td>
+                    <td>
+                        <span class="difficulty-badge difficulty-Medium">Medium</span>
+                    </td>
+                    <td>
+                        <a href="https://leetcode.com/problems/sort-colors/" target="_blank" class="btn-solve">
+                            Solve <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </td>
+                </tr>
+                
+                <tr class="problem-row">
+                    <td>#3</td>
+                    <td>
+                        <a href="https://leetcode.com/problems/kth-largest-element-in-an-array/" target="_blank" class="problem-name">Kth Largest Element in an Array</a>
+                    </td>
+                    <td>
+                        <span class="difficulty-badge difficulty-Medium">Medium</span>
+                    </td>
+                    <td>
+                        <a href="https://leetcode.com/problems/kth-largest-element-in-an-array/" target="_blank" class="btn-solve">
+                            Solve <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </td>
+                </tr>
+                
+            </table>
+        </div>
+        
+        <div class="topic-section">
+            <div class="topic-header">
+                <i class="fas fa-folder-open"></i>
+                <h2>DP</h2>
+                <span style="opacity: 0.5; font-size: 0.9rem;">(4 Problems)</span>
+            </div>
+
+            <table class="problems-table">
+                
+                <tr class="problem-row">
+                    <td>#1</td>
+                    <td>
+                        <a href="https://leetcode.com/problems/coin-change/" target="_blank" class="problem-name">Coin Change</a>
+                    </td>
+                    <td>
+                        <span class="difficulty-badge difficulty-Medium">Medium</span>
+                    </td>
+                    <td>
+                        <a href="https://leetcode.com/problems/coin-change/" target="_blank" class="btn-solve">
+                            Solve <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </td>
+                </tr>
+                
+                <tr class="problem-row">
+                    <td>#2</td>
+                    <td>
+                        <a href="https://leetcode.com/problems/longest-increasing-subsequence/" target="_blank" class="problem-name">Longest Increasing Subsequence</a>
+                    </td>
+                    <td>
+                        <span class="difficulty-badge difficulty-Medium">Medium</span>
+                    </td>
+                    <td>
+                        <a href="https://leetcode.com/problems/longest-increasing-subsequence/" target="_blank" class="btn-solve">
+                            Solve <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </td>
+                </tr>
+                
+                <tr class="problem-row">
+                    <td>#3</td>
+                    <td>
+                        <a href="https://leetcode.com/problems/house-robber/" target="_blank" class="problem-name">House Robber</a>
+                    </td>
+                    <td>
+                        <span class="difficulty-badge difficulty-Medium">Medium</span>
+                    </td>
+                    <td>
+                        <a href="https://leetcode.com/problems/house-robber/" target="_blank" class="btn-solve">
+                            Solve <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </td>
+                </tr>
+                
+                <tr class="problem-row">
+                    <td>#4</td>
+                    <td>
+                        <a href="https://leetcode.com/problems/edit-distance/" target="_blank" class="problem-name">Edit Distance</a>
+                    </td>
+                    <td>
+                        <span class="difficulty-badge difficulty-Hard">Hard</span>
+                    </td>
+                    <td>
+                        <a href="https://leetcode.com/problems/edit-distance/" target="_blank" class="btn-solve">
+                            Solve <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </td>
+                </tr>
+                
+            </table>
+        </div>
+        
+    </div>
+
+    <script src="/static/js/main.js"></script>
+    <script>
+        function filterProblems() {
+            let input = document.getElementById('problemSearch');
+            let filter = input.value.toUpperCase();
+            let rows = document.getElementsByClassName('problem-row');
+
+            for (let i = 0; i < rows.length; i++) {
+                let nameCell = rows[i].getElementsByClassName('problem-name')[0];
+                let topicDiv = rows[i].closest('.topic-section').getElementsByTagName('h2')[0];
+                let difficulty = rows[i].getElementsByClassName('difficulty-badge')[0];
+
+                if (nameCell || topicDiv) {
+                    let txtValue = (nameCell.textContent || nameCell.innerText) +
+                        (topicDiv.textContent || topicDiv.innerText) +
+                        (difficulty.textContent || difficulty.innerText);
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        rows[i].style.display = "";
+                    } else {
+                        rows[i].style.display = "none";
+                    }
+                }
+            }
+
+            // Hide headers if no children visible
+            let sections = document.getElementsByClassName('topic-section');
+            for (let s of sections) {
+                let visibleRows = s.querySelectorAll('.problem-row[style=""]');
+                if (visibleRows.length === 0 && filter !== "") {
+                    // Check if all rows are hidden
+                    let allHidden = true;
+                    for (let r of s.getElementsByClassName('problem-row')) {
+                        if (r.style.display !== 'none') allHidden = false;
+                    }
+                    s.style.display = allHidden ? "none" : "";
+                } else {
+                    s.style.display = "";
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
