@@ -96,7 +96,7 @@ let allJobs = [];
 
 async function fetchJobs() {
     try {
-        const response = await fetch('api/jobs.json');
+        const response = await fetch('jobs.json');
         const jobs = await response.json();
         allJobs = jobs;
         renderJobs(jobs);
@@ -107,7 +107,7 @@ async function fetchJobs() {
 
 async function fetchPrep() {
     try {
-        const response = await fetch('api/prep.json');
+        const response = await fetch('prep.json');
         const prep = await response.json();
         renderPrep(prep);
     } catch (error) {
@@ -169,7 +169,7 @@ function renderPrep(materials) {
             <div style="font-size: 0.7rem; color: var(--accent-color); font-weight: 800; text-transform: uppercase; margin-bottom: 0.5rem;">${item.category}</div>
             <h4>${item.title}</h4>
             <p>${item.description}</p>
-            <a href="/prep/${item.id}" class="btn-outline" style="text-decoration: none; display: inline-block; margin-top: 1rem;">Start Learning</a>
+            <a href="prep_${item.id}.html" class="btn-outline" style="text-decoration: none; display: inline-block; margin-top: 1rem;">Start Learning</a>
         `;
 
         card.addEventListener('click', (e) => {
