@@ -2,8 +2,7 @@ import sqlite3
 import os
 import json
 
-def init_db(db_path='horizon.db'):
-    conn = sqlite3.connect(db_path)
+def init_db(conn):
     cursor = conn.cursor()
 
     # Jobs Table
@@ -223,10 +222,12 @@ def init_db(db_path='horizon.db'):
     ''', practice)
 
     conn.commit()
-    conn.close()
+    # Connection is managed externally, do not close here
 
 if __name__ == "__main__":
     if os.path.exists('horizon.db'):
         os.remove('horizon.db')
-    init_db()
+    conn = sqlite3.connect('horizon.db')
+    init_db(conn)
+    conn.close()
     print("Database with Jobs, Prep Materials, Companies, and Practice Questions initialized successfully.")
