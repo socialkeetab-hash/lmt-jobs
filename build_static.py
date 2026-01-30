@@ -114,6 +114,10 @@ for filename in os.listdir(DOCS_DIR):
         content = content.replace('href="/practice"', 'href="practice.html"')
         content = content.replace('href="/"', 'href="index.html"')
         
+        # fix CSS/JS paths to be relative (remove leading slash)
+        content = content.replace('href="/static/css/style.css"', 'href="static/css/style.css"')
+        content = content.replace('src="/static/js/main.js"', 'src="static/js/main.js"')
+
         with open(path, 'w') as f:
             f.write(content)
 
