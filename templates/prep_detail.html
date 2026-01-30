@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ prep.title }} | LMT JOBS Preparation</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .detail-header {
+            padding: 8rem 10% 4rem;
+            background: linear-gradient(to bottom, var(--card-bg), transparent);
+            text-align: center;
+        }
+
+        .category-badge {
+            background: var(--accent-glow);
+            color: var(--accent-color);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .detail-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 10% 10rem;
+        }
+
+        .content-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 30px;
+            padding: 3rem;
+            backdrop-filter: var(--glass-blur);
+            margin-bottom: 3rem;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            color: var(--accent-color);
+        }
+
+        .section-header i {
+            font-size: 1.5rem;
+        }
+
+        .roadmap-list {
+            list-style: none;
+        }
+
+        .roadmap-item {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .roadmap-item::before {
+            content: '';
+            position: absolute;
+            left: 12px;
+            top: 24px;
+            bottom: -24px;
+            width: 2px;
+            background: var(--border-color);
+        }
+
+        .roadmap-item:last-child::before {
+            display: none;
+        }
+
+        .step-num {
+            width: 26px;
+            height: 26px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--bg-color);
+            font-weight: 800;
+            font-size: 0.8rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .notes-content {
+            line-height: 1.8;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .question-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            padding: 2rem;
+            border-radius: 20px;
+            margin-bottom: 1.5rem;
+        }
+
+        .question-text {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .answer-box {
+            padding: 1rem;
+            background: rgba(255, 230, 0, 0.05);
+            border-left: 4px solid var(--accent-color);
+            border-radius: 4px;
+            font-family: monospace;
+            display: none;
+        }
+
+        .show-answer {
+            background: transparent;
+            border: 1px solid var(--accent-color);
+            color: var(--accent-color);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            margin-top: 1rem;
+            transition: var(--transition);
+        }
+
+        .show-answer:hover {
+            background: var(--accent-color);
+            color: black;
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            z-index: 1001;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            backdrop-filter: var(--glass-blur);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .back-btn:hover {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+    </style>
+</head>
+
+<body>
+    <div style="position: fixed; top: 2rem; left: 2rem; z-index: 1001; display: flex; gap: 1rem;">
+        <a href="/" class="back-btn" style="position: static; margin: 0;"><i class="fas fa-arrow-left"></i> Back to
+            Home</a>
+        <button class="theme-toggle" id="themeToggle">
+            <i class="fas fa-sun"></i>
+        </button>
+    </div>
+
+    <header class="detail-header">
+        <span class="category-badge">{{ prep.category }}</span>
+        <h1 style="font-size: 3.5rem; margin-bottom: 1rem;">{{ prep.title }}</h1>
+        <p style="color: var(--text-secondary); max-width: 600px; margin: 0 auto;">{{ prep.description }}</p>
+    </header>
+
+    <div class="detail-container">
+        <!-- Roadmap Section -->
+        <div class="content-card">
+            <div class="section-header">
+                <i class="fas fa-map-signs"></i>
+                <h2>Learning Roadmap</h2>
+            </div>
+            <ul class="roadmap-list">
+                {% for step in prep.roadmap %}
+                <li class="roadmap-item">
+                    <div class="step-num">{{ loop.index }}</div>
+                    <span>{{ step }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- Notes Section -->
+        <div class="content-card">
+            <div class="section-header">
+                <i class="fas fa-book-open"></i>
+                <h2>Topic Notes</h2>
+            </div>
+            <div class="notes-content">
+                {{ prep.notes }}
+            </div>
+        </div>
+
+        <!-- Practice Section -->
+        <div class="content-card">
+            <div class="section-header">
+                <i class="fas fa-tasks"></i>
+                <h2>Practice Questions</h2>
+            </div>
+            {% for q in prep.questions %}
+            <div class="question-card">
+                <span class="question-text">Q{{ loop.index }}: {{ q.q }}</span>
+                <button class="show-answer" onclick="toggleAnswer(this)">Show Answer</button>
+                <div class="answer-box">
+                    Ans: {{ q.a }}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script src="/static/js/main.js"></script>
+    <script>
+        function toggleAnswer(btn) {
+            const box = btn.nextElementSibling;
+            if (box.style.display === 'block') {
+                box.style.display = 'none';
+                btn.innerText = 'Show Answer';
+            } else {
+                box.style.display = 'block';
+                btn.innerText = 'Hide Answer';
+            }
+        }
+    </script>
+</body>
+
+</html>

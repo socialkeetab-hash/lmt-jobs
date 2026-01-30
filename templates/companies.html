@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Companies | LMT JOBS</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .companies-hero {
+            padding: 8rem 10% 4rem;
+            text-align: center;
+            background: linear-gradient(to bottom, var(--card-bg), transparent);
+        }
+
+        .companies-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .companies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            padding: 2rem 10% 8rem;
+        }
+
+        .company-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .company-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-color);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(255, 215, 0, 0.1);
+        }
+
+        .company-logo {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            background: white;
+            padding: 10px;
+            border-radius: 1rem;
+        }
+
+        .company-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+
+        .company-desc {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            opacity: 0.8;
+            margin-bottom: 1rem;
+        }
+
+        .action-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .btn-action {
+            padding: 0.8rem;
+            border-radius: 0.8rem;
+            border: 1px solid var(--border-color);
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .btn-action:hover {
+            background: var(--accent-color);
+            color: black;
+            border-color: var(--accent-color);
+        }
+
+        /* Modal Styling for details */
+        .info-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--modal-overlay);
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .info-content {
+            background: var(--card-bg);
+            width: 90%;
+            max-width: 600px;
+            padding: 3rem;
+            border-radius: 2rem;
+            border: 1px solid var(--accent-color);
+            position: relative;
+        }
+
+        .close-info {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--accent-color);
+        }
+
+        .info-title {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-color);
+        }
+
+        .info-body {
+            line-height: 1.8;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .back-nav {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            z-index: 100;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="back-nav" style="display: flex; gap: 1rem;">
+        <a href="/" class="btn-outline" style="text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+            <i class="fas fa-arrow-left"></i> Back to Home
+        </a>
+        <button class="theme-toggle" id="themeToggle">
+            <i class="fas fa-sun"></i>
+        </button>
+    </div>
+
+    <section class="companies-hero">
+        <span>TOP RECRUITERS</span>
+        <h1>Partner <span>Companies</span></h1>
+        <p>Expert guides and preparation material for your dream companies.</p>
+    </section>
+
+    <div class="companies-grid">
+        {% for company in companies %}
+        <div class="company-card">
+            <img src="{{ company.logo_url }}" alt="{{ company.name }}" class="company-logo">
+            <div class="company-name">{{ company.name }}</div>
+            <p class="company-desc">{{ company.description }}</p>
+
+            <div class="action-buttons">
+                <button class="btn-action"
+                    onclick="showInfo('{{ company.name }}', 'Hiring Process', `{{ company.hiring_process }}`)">
+                    <i class="fas fa-user-tie"></i> Hiring Process
+                </button>
+                <button class="btn-action"
+                    onclick="showInfo('{{ company.name }}', 'Syllabus', `{{ company.syllabus }}`)">
+                    <i class="fas fa-book"></i> Syllabus
+                </button>
+                <button class="btn-action"
+                    onclick="showInfo('{{ company.name }}', 'Exam Pattern', `{{ company.exam_pattern }}`)">
+                    <i class="fas fa-clipboard-list"></i> Exam Pattern
+                </button>
+                <button class="btn-action"
+                    onclick="showInfo('{{ company.name }}', 'Eligibility Criteria', `{{ company.eligibility }}`)">
+                    <i class="fas fa-check-circle"></i> Eligibility
+                </button>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div id="infoModal" class="info-modal">
+        <div class="info-content">
+            <span class="close-info" onclick="closeInfo()">&times;</span>
+            <div id="modalCompany"
+                style="font-size: 0.9rem; color: #888; text-transform: uppercase; letter-spacing: 2px;"></div>
+            <div id="modalTitle" class="info-title"></div>
+            <div id="modalBody" class="info-body"></div>
+        </div>
+    </div>
+
+    <script src="/static/js/main.js"></script>
+    <script>
+        function showInfo(company, title, content) {
+            document.getElementById('modalCompany').innerText = company;
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalBody').innerText = content;
+            document.getElementById('infoModal').style.display = 'flex';
+        }
+
+        function closeInfo() {
+            document.getElementById('infoModal').style.display = 'none';
+        }
+
+        window.onclick = function (event) {
+            if (event.target == document.getElementById('infoModal')) {
+                closeInfo();
+            }
+        }
+    </script>
+</body>
+
+</html>
