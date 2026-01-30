@@ -2,8 +2,8 @@ import sqlite3
 import os
 import json
 
-def init_db():
-    conn = sqlite3.connect('horizon.db')
+def init_db(db_path='horizon.db'):
+    conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
 
     # Jobs Table

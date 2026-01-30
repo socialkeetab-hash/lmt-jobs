@@ -24,18 +24,21 @@ def get_db_connection():
 
 # Helper function to initialize DB in /tmp for Vercel
 def init_db_if_not_exists():
-    if not os.path.exists('/tmp/horizon.db'):
+    dest_db = '/tmp/horizon.db'
+    if not os.path.exists(dest_db):
         import shutil
-        # If a pre-seeded DB exists in the project root, copy it
-        if os.path.exists('horizon.db'):
-            shutil.copyfile('horizon.db', '/tmp/horizon.db')
+        # Use absolute path to find the source DB
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        src_db = os.path.join(base_dir, 'horizon.db')
+        
+        if os.path.exists(src_db):
+            shutil.copyfile(src_db, dest_db)
+            print(f"Copied DB from {src_db} to {dest_db}")
         else:
-            # Fallback: create a new one from database.py logic (simplified here)
-            # In production, relying on the copied file is safer.
-             from database import init_db
-             # Temporarily patch init_db to write to /tmp
-             # ... or just ensure 'horizon.db' is committed to git.
-             pass
+            print(f"Source DB not found at {src_db}. Initializing new DB at {dest_db}...")
+            # Fallback: create a new one using init_db
+            from database import init_db
+            init_db(dest_db)
 
 init_db_if_not_exists()
 
